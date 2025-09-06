@@ -7,6 +7,8 @@ public class MarsRover {
     public static final String BACK = "B";
     public static final int FORWARD = 1;
     public static final int BACKWARD = -1;
+    public static final int LEFTWARD = -1;
+    public static final int RIGHTWARD = 1;
     private int x;
     private int y;
     private Direction direction;
@@ -51,10 +53,10 @@ public class MarsRover {
                             movement(FORWARD);
                             break;
                         case LEFT:
-                            turnLeft();
+                            rotate(LEFTWARD);
                             break;
                         case RIGHT:
-                            turnRight();
+                            rotate(RIGHTWARD);
                             break;
                         case BACK:
                             movement(BACKWARD);
@@ -82,38 +84,11 @@ public class MarsRover {
         }
     }
 
-    private void turnLeft() {
-        switch (direction) {
-            case NORTH:
-                direction = Direction.WEST;
-                break;
-            case EAST:
-                direction = Direction.NORTH;
-                break;
-            case SOUTH:
-                direction = Direction.EAST;
-                break;
-            case WEST:
-                direction = Direction.SOUTH;
-                break;
-        }
-    }
-
-    private void turnRight() {
-        switch (direction) {
-            case NORTH:
-                direction = Direction.EAST;
-                break;
-            case EAST:
-                direction = Direction.SOUTH;
-                break;
-            case SOUTH:
-                direction = Direction.WEST;
-                break;
-            case WEST:
-                direction = Direction.NORTH;
-                break;
-        }
+    private void rotate(int lateral) {
+        Direction[] dirs = Direction.values();
+        int len = dirs.length;
+        int newIndex = (direction.ordinal() + lateral + len) % len;
+        direction = dirs[newIndex];
     }
 
     public String getLocation() {

@@ -1,6 +1,9 @@
 package com.afs.tdd;
 
 public class MarsRover {
+    public static final String MOVE = "M";
+    public static final String LEFT = "L";
+    public static final String RIGHT = "R";
     private int x;
     private int y;
     private Direction direction;
@@ -34,13 +37,13 @@ public class MarsRover {
     }
 
     public void executeCommand(String command) {
-        if (command.equals("M")) {
+        if (command.equals(MOVE)) {
             move();
         }
-        if (command.equals("L")) {
+        if (command.equals(LEFT)) {
             turnLeft();
         }
-        if (command.equals("R")) {
+        if (command.equals(RIGHT)) {
             turnRight();
         }
     }

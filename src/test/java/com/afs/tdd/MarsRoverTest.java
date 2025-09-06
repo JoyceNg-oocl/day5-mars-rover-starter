@@ -80,6 +80,16 @@ class MarsRoverTest {
     }
 
     @Test
+    void should_return_x_plus_when_B_given_W() {
+        MarsRover marsRover = new MarsRover(0, 0, "W");
+
+        marsRover.executeCommand("B");
+
+        String expectedResult = "(" + 1 + "," + 0 + "," + "W" + ")";
+        assertEquals(expectedResult, marsRover.getLocation());
+    }
+
+    @Test
     void should_return_direction_W_when_L_given_N() {
         MarsRover marsRover = new MarsRover(0, 0, "N");
 

@@ -9,6 +9,8 @@ public class MarsRover {
     public static final int BACKWARD = -1;
     public static final int LEFTWARD = -1;
     public static final int RIGHTWARD = 1;
+
+    private final CommandFactory commandFactory;
     private int x;
     private int y;
     private Direction direction;
@@ -34,40 +36,26 @@ public class MarsRover {
                     throw new IllegalArgumentException("Invalid direction: " + direction);
             }
         }
-
     }
 
     public MarsRover(int x, int y, String direction) {
         this.x = x;
         this.y = y;
         this.direction = Direction.fromString(direction);
+        this.commandFactory = new CommandFactory(this);
     }
 
     public void executeCommand(String commands) {
         commands.chars()
                 .mapToObj(c -> String.valueOf((char) c))
                 .filter(s -> !s.trim().isEmpty())
-                .forEach(command -> {
-                    switch (command) {
-                        case MOVE:
-                            movement(FORWARD);
-                            break;
-                        case LEFT:
-                            rotate(LEFTWARD);
-                            break;
-                        case RIGHT:
-                            rotate(RIGHTWARD);
-                            break;
-                        case BACK:
-                            movement(BACKWARD);
-                            break;
-                        default:
-                            throw new IllegalArgumentException("Invalid command: " + command);
-                    }
+                .forEach(commandString -> {
+                    Command command = commandFactory.getCommand(commandString);
+                    command.execute();
                 });
     }
 
-    private void movement(int longitudinal) {
+    protected void movement(int longitudinal) {
         switch (direction) {
             case NORTH:
                 y += longitudinal;
@@ -84,7 +72,7 @@ public class MarsRover {
         }
     }
 
-    private void rotate(int lateral) {
+    protected void rotate(int lateral) {
         Direction[] dirs = Direction.values();
         int len = dirs.length;
         int newIndex = (direction.ordinal() + lateral + len) % len;

@@ -96,4 +96,14 @@ class MarsRoverTest {
         String expectedResult = "(" + 0 + "," + 0 + "," + "E" + ")";
         assertEquals(expectedResult, marsRover.getLocation());
     }
+
+    @Test
+    void should_return_direction_S_when_R_given_E() {
+        MarsRover marsRover = new MarsRover(0, 0, "E");
+
+        marsRover.executeCommand("R");
+
+        String expectedResult = "(" + 0 + "," + 0 + "," + "S" + ")";
+        assertEquals(expectedResult, marsRover.getLocation());
+    }
 }

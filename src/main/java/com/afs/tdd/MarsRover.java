@@ -23,8 +23,10 @@ public class MarsRover {
                     return Direction.EAST;
                 case "S":
                     return Direction.SOUTH;
-                default:
+                case "W":
                     return Direction.WEST;
+                default:
+                    throw new IllegalArgumentException("Invalid direction: " + direction);
             }
         }
 
@@ -37,14 +39,14 @@ public class MarsRover {
     }
 
     public void executeCommand(String command) {
-        if (command.equals(MOVE)) {
+        if (MOVE.equals(command)) {
             move();
-        }
-        if (command.equals(LEFT)) {
+        } else if (LEFT.equals(command)) {
             turnLeft();
-        }
-        if (command.equals(RIGHT)) {
+        } else if (RIGHT.equals(command)) {
             turnRight();
+        } else {
+            throw new IllegalArgumentException("Invalid command: " + command);
         }
     }
 

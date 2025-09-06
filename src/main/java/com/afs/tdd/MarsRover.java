@@ -5,6 +5,8 @@ public class MarsRover {
     public static final String LEFT = "L";
     public static final String RIGHT = "R";
     public static final String BACK = "B";
+    public static final int FORWARD = 1;
+    public static final int BACKWARD = -1;
     private int x;
     private int y;
     private Direction direction;
@@ -47,7 +49,7 @@ public class MarsRover {
             String command = String.valueOf(ch);
             switch (command) {
                 case MOVE:
-                    move();
+                    movement(FORWARD);
                     break;
                 case LEFT:
                     turnLeft();
@@ -56,7 +58,7 @@ public class MarsRover {
                     turnRight();
                     break;
                 case BACK:
-                    back();
+                    movement(BACKWARD);
                     break;
                 default:
                     throw new IllegalArgumentException("Invalid command: " + command);
@@ -64,19 +66,19 @@ public class MarsRover {
         }
     }
 
-    private void move() {
+    private void movement(int longitudinal) {
         switch (direction) {
             case NORTH:
-                y += 1;
+                y += longitudinal;
                 break;
             case EAST:
-                x += 1;
+                x += longitudinal;
                 break;
             case SOUTH:
-                y -= 1;
+                y -= longitudinal;
                 break;
             case WEST:
-                x -= 1;
+                x -= longitudinal;
                 break;
         }
     }
@@ -111,23 +113,6 @@ public class MarsRover {
                 break;
             case WEST:
                 direction = Direction.NORTH;
-                break;
-        }
-    }
-
-    private void back() {
-        switch (direction) {
-            case NORTH:
-                y -= 1;
-                break;
-            case EAST:
-                x -= 1;
-                break;
-            case SOUTH:
-                y += 1;
-                break;
-            case WEST:
-                x += 1;
                 break;
         }
     }

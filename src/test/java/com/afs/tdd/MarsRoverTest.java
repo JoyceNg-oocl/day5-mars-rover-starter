@@ -168,4 +168,25 @@ class MarsRoverTest {
         String expectedResult = "(" + 0 + "," + 0 + "," + "N" + ")";
         assertEquals(expectedResult, marsRover.getLocation());
     }
+
+//    BATCH COMMANDS TEST
+    @Test
+    void should_return_00N_when_empty_command_given() {
+        MarsRover marsRover = new MarsRover(0, 0, "N");
+
+        marsRover.executeCommand("");
+
+        String expectedResult = "(" + 0 + "," + 0 + "," + "N" + ")";
+        assertEquals(expectedResult, marsRover.getLocation());
+    }
+
+        @Test
+    void should_return_02N_when_MM_given_N() {
+        MarsRover marsRover = new MarsRover(0, 0, "N");
+
+        marsRover.executeCommand("MM");
+
+        String expectedResult = "(" + 0 + "," + 2 + "," + "N" + ")";
+        assertEquals(expectedResult, marsRover.getLocation());
+    }
 }

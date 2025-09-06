@@ -39,17 +39,23 @@ public class MarsRover {
         this.direction = Direction.fromString(direction);
     }
 
-    public void executeCommand(String command) {
-        if (MOVE.equals(command)) {
-            move();
-        } else if (LEFT.equals(command)) {
-            turnLeft();
-        } else if (RIGHT.equals(command)) {
-            turnRight();
-        } else if (BACK.equals(command)) {
-            back();
-        } else {
-            throw new IllegalArgumentException("Invalid command: " + command);
+    public void executeCommand(String commands) {
+        for (char ch : commands.toCharArray()) {
+            if (Character.isWhitespace(ch)) {
+                continue;
+            }
+            String command = String.valueOf(ch);
+            if (MOVE.equals(command)) {
+                move();
+            } else if (LEFT.equals(command)) {
+                turnLeft();
+            } else if (RIGHT.equals(command)) {
+                turnRight();
+            } else if (BACK.equals(command)) {
+                back();
+            } else {
+                throw new IllegalArgumentException("Invalid command: " + command);
+            }
         }
     }
 

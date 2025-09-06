@@ -45,16 +45,21 @@ public class MarsRover {
                 continue;
             }
             String command = String.valueOf(ch);
-            if (MOVE.equals(command)) {
-                move();
-            } else if (LEFT.equals(command)) {
-                turnLeft();
-            } else if (RIGHT.equals(command)) {
-                turnRight();
-            } else if (BACK.equals(command)) {
-                back();
-            } else {
-                throw new IllegalArgumentException("Invalid command: " + command);
+            switch (command) {
+                case MOVE:
+                    move();
+                    break;
+                case LEFT:
+                    turnLeft();
+                    break;
+                case RIGHT:
+                    turnRight();
+                    break;
+                case BACK:
+                    back();
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid command: " + command);
             }
         }
     }

@@ -15,6 +15,9 @@ public class MarsRover {
         if (command.equals("M")) {
             move();
         }
+        if (command.equals("L")) {
+            turnLeft();
+        }
     }
 
     private void move() {
@@ -30,6 +33,14 @@ public class MarsRover {
                 break;
             case "W":
                 x -= 1;
+                break;
+        }
+    }
+
+    private void turnLeft() {
+        switch (direction) {
+            case "N":
+                direction = "W";
                 break;
         }
     }

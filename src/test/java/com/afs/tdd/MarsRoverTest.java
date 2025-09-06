@@ -180,7 +180,7 @@ class MarsRoverTest {
         assertEquals(expectedResult, marsRover.getLocation());
     }
 
-        @Test
+    @Test
     void should_return_02N_when_MM_given_N() {
         MarsRover marsRover = new MarsRover(0, 0, "N");
 
@@ -189,13 +189,24 @@ class MarsRoverTest {
         String expectedResult = "(" + 0 + "," + 2 + "," + "N" + ")";
         assertEquals(expectedResult, marsRover.getLocation());
     }
-        @Test
+
+    @Test
     void should_return_2minus2N_when_RMMLBB_given_N() {
         MarsRover marsRover = new MarsRover(0, 0, "N");
 
         marsRover.executeCommand("RMMLBB");
 
         String expectedResult = "(" + 2 + "," + -2 + "," + "N" + ")";
+        assertEquals(expectedResult, marsRover.getLocation());
+    }
+
+    @Test
+    void should_execute_successfully_when_space_included() {
+        MarsRover marsRover = new MarsRover(0, 0, "N");
+
+        marsRover.executeCommand("MM R M MR M M");
+
+        String expectedResult = "(" + 2 + "," + 0 + "," + "S" + ")";
         assertEquals(expectedResult, marsRover.getLocation());
     }
 }

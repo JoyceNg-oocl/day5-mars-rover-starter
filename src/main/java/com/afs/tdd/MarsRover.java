@@ -42,28 +42,27 @@ public class MarsRover {
     }
 
     public void executeCommand(String commands) {
-        for (char ch : commands.toCharArray()) {
-            if (Character.isWhitespace(ch)) {
-                continue;
-            }
-            String command = String.valueOf(ch);
-            switch (command) {
-                case MOVE:
-                    movement(FORWARD);
-                    break;
-                case LEFT:
-                    turnLeft();
-                    break;
-                case RIGHT:
-                    turnRight();
-                    break;
-                case BACK:
-                    movement(BACKWARD);
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid command: " + command);
-            }
-        }
+        commands.chars()
+                .mapToObj(c -> String.valueOf((char) c))
+                .filter(s -> !s.trim().isEmpty())
+                .forEach(command -> {
+                    switch (command) {
+                        case MOVE:
+                            movement(FORWARD);
+                            break;
+                        case LEFT:
+                            turnLeft();
+                            break;
+                        case RIGHT:
+                            turnRight();
+                            break;
+                        case BACK:
+                            movement(BACKWARD);
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Invalid command: " + command);
+                    }
+                });
     }
 
     private void movement(int longitudinal) {

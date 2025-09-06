@@ -12,11 +12,11 @@ repositories {
     mavenCentral()
 }
 
-jacocoTestReport {
-    reports {
-        csv.enabled true
-    }
-}
+//jacocoTestReport {
+//    reports {
+//        csv.enabled true
+//    }
+//}
 
 dependencies {
     // Use JUnit Jupiter API for testing.
@@ -25,7 +25,7 @@ dependencies {
     // Use JUnit Jupiter Engine for testing.
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
 
-    testCompile "org.mockito:mockito-core:3.4.0"
+//    testCompile "org.mockito:mockito-core:3.4.0"
 }
 
 test {

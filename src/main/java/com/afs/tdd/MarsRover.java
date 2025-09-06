@@ -3,12 +3,34 @@ package com.afs.tdd;
 public class MarsRover {
     private int x;
     private int y;
-    private String direction;
+    private Direction direction;
+
+    public enum Direction {
+        NORTH, EAST, SOUTH, WEST;
+
+        public String toDirectionString() {
+            return String.valueOf(name().charAt(0));
+        }
+
+        public static Direction fromString(String direction) {
+            switch (direction) {
+                case "N":
+                    return Direction.NORTH;
+                case "E":
+                    return Direction.EAST;
+                case "S":
+                    return Direction.SOUTH;
+                default:
+                    return Direction.WEST;
+            }
+        }
+
+    }
 
     public MarsRover(int x, int y, String direction) {
         this.x = x;
         this.y = y;
-        this.direction = direction;
+        this.direction = Direction.fromString(direction);
     }
 
     public void executeCommand(String command) {
@@ -25,16 +47,16 @@ public class MarsRover {
 
     private void move() {
         switch (direction) {
-            case "N":
+            case NORTH:
                 y += 1;
                 break;
-            case "E":
+            case EAST:
                 x += 1;
                 break;
-            case "S":
+            case SOUTH:
                 y -= 1;
                 break;
-            case "W":
+            case WEST:
                 x -= 1;
                 break;
         }
@@ -42,39 +64,39 @@ public class MarsRover {
 
     private void turnLeft() {
         switch (direction) {
-            case "N":
-                direction = "W";
+            case NORTH:
+                direction = Direction.WEST;
                 break;
-            case "W":
-                direction = "S";
+            case EAST:
+                direction = Direction.NORTH;
                 break;
-            case "S":
-                direction = "E";
+            case SOUTH:
+                direction = Direction.EAST;
                 break;
-            case "E":
-                direction = "N";
+            case WEST:
+                direction = Direction.SOUTH;
                 break;
         }
     }
 
     private void turnRight() {
         switch (direction) {
-            case "N":
-                direction = "E";
+            case NORTH:
+                direction = Direction.EAST;
                 break;
-            case "E":
-                direction = "S";
+            case EAST:
+                direction = Direction.SOUTH;
                 break;
-            case "S":
-                direction = "W";
+            case SOUTH:
+                direction = Direction.WEST;
                 break;
-            case "W":
-                direction = "N";
+            case WEST:
+                direction = Direction.NORTH;
                 break;
         }
     }
 
     public String getLocation() {
-        return "(" + x + "," + y + "," + direction + ")";
+        return "(" + x + "," + y + "," + direction.toDirectionString() + ")";
     }
 }

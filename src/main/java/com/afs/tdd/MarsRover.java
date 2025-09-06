@@ -4,6 +4,7 @@ public class MarsRover {
     public static final String MOVE = "M";
     public static final String LEFT = "L";
     public static final String RIGHT = "R";
+    public static final String BACK = "B";
     private int x;
     private int y;
     private Direction direction;
@@ -45,6 +46,8 @@ public class MarsRover {
             turnLeft();
         } else if (RIGHT.equals(command)) {
             turnRight();
+        } else if (BACK.equals(command)) {
+            back();
         } else {
             throw new IllegalArgumentException("Invalid command: " + command);
         }
@@ -97,6 +100,14 @@ public class MarsRover {
                 break;
             case WEST:
                 direction = Direction.NORTH;
+                break;
+        }
+    }
+
+    private void back() {
+        switch (direction) {
+            case NORTH:
+                y -= 1;
                 break;
         }
     }

@@ -189,4 +189,13 @@ class MarsRoverTest {
         String expectedResult = "(" + 0 + "," + 2 + "," + "N" + ")";
         assertEquals(expectedResult, marsRover.getLocation());
     }
+        @Test
+    void should_return_2minus2N_when_RMMLBB_given_N() {
+        MarsRover marsRover = new MarsRover(0, 0, "N");
+
+        marsRover.executeCommand("RMMLBB");
+
+        String expectedResult = "(" + 2 + "," + -2 + "," + "N" + ")";
+        assertEquals(expectedResult, marsRover.getLocation());
+    }
 }

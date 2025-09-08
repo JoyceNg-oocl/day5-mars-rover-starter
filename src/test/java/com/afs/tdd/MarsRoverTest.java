@@ -169,7 +169,7 @@ class MarsRoverTest {
         assertEquals(expectedResult, marsRover.getLocation());
     }
 
-//    BATCH COMMANDS TEST
+    //    BATCH COMMANDS TEST
     @Test
     void should_return_00N_when_empty_command_given() {
         MarsRover marsRover = new MarsRover(0, 0, "N");
@@ -229,6 +229,15 @@ class MarsRoverTest {
             marsRover.executeCommand("MMXMM");
         } catch (IllegalArgumentException e) {
             assertEquals("Invalid command: X", e.getMessage());
+        }
+    }
+
+    @Test
+    void should_throw_exception_when_invalid_initial_direction_given() {
+        try {
+            MarsRover marsRover = new MarsRover(0, 0, "A");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Invalid direction: A", e.getMessage());
         }
     }
 }

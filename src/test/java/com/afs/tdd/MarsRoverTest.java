@@ -209,4 +209,26 @@ class MarsRoverTest {
         String expectedResult = "(" + 2 + "," + 0 + "," + "S" + ")";
         assertEquals(expectedResult, marsRover.getLocation());
     }
+
+    @Test
+    void should_throw_exception_when_invalid_command_given() {
+        MarsRover marsRover = new MarsRover(0, 0, "N");
+
+        try {
+            marsRover.executeCommand("A");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Invalid command: A", e.getMessage());
+        }
+    }
+
+    @Test
+    void should_throw_exception_when_invalid_command_in_batch_given() {
+        MarsRover marsRover = new MarsRover(0, 0, "N");
+
+        try {
+            marsRover.executeCommand("MMXMM");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Invalid command: X", e.getMessage());
+        }
+    }
 }
